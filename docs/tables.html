@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Tables · Enterprise Data Coordinator Documentation</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The EDC Table endpoint allows for the EDC to interact with tables in the following ways:"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Tables · Enterprise Data Coordinator Documentation"/><meta property="og:type" content="website"/><meta property="og:url" content="https://intellectix.github.io/"/><meta property="og:description" content="The EDC Table endpoint allows for the EDC to interact with tables in the following ways:"/><meta property="og:image" content="https://intellectix.github.io/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://intellectix.github.io/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><h2 class="headerTitle">Enterprise Data Coordinator Documentation</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/overview" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Web API</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Welcome</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/overview">EDC Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/web-install">API Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/embedded-install">.Net Installation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Using The Dashboard</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/home-page">Home Page</a></li><li class="navListItem"><a class="navItem" href="/docs/connectors">Connectors</a></li><li class="navListItem"><a class="navItem" href="/docs/roles">Roles [Pro]</a></li><li class="navListItem"><a class="navItem" href="/docs/app-keys">App Keys [Pro]</a></li><li class="navListItem"><a class="navItem" href="/docs/users">Users [Pro]</a></li><li class="navListItem"><a class="navItem" href="/docs/requests">Requests</a></li><li class="navListItem"><a class="navItem" href="/docs/developer-console">Developer Console [Pro]</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">.Net Applications</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/table-operations">Table Operations</a></li><li class="navListItem"><a class="navItem" href="/docs/view-operations">View Operations</a></li><li class="navListItem"><a class="navItem" href="/docs/schema-operations">Schema Operations</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Web API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/basic-auth">Basic Authentication</a></li><li class="navListItem"><a class="navItem" href="/docs/schema">Schema</a></li><li class="navListItem"><a class="navItem" href="/docs/stored-procedure">Stored Procedure</a></li><li class="navListItem"><a class="navItem" href="/docs/stored-procedure-definition">Stored Procedure Definitions</a></li><li class="navListItem"><a class="navItem" href="/docs/table-definition">Table Definitions</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/tables">Tables</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Tables</h1></header><article><div><span><p>The EDC Table endpoint allows for the EDC to interact with tables in the following ways:</p>
+<ul>
+<li>Retrieve data from a given table</li>
+<li>Insert a record into a given table</li>
+<li>Remove record from a given table</li>
+<li>Retrieve single row by primary key</li>
+<li>Update record in a given table</li>
+</ul>
+<p>In order for the endpoint to work, make sure that a User's authorization token can be used in the header of the request.</p>
+<h2><a class="anchor" aria-hidden="true" id="retrieve-data-from-a-table"></a><a href="#retrieve-data-from-a-table" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Retrieve data from a table</h2>
+<p>To retrieve data from a table through the EDC, perform the following <code>GET</code> request:</p>
+<p><code>&quot;server_url&quot;/edc/api/{connectorName}/_table/{tableName}</code></p>
+<p><strong>Example</strong> In a React application, this request might look like the following:</p>
+<pre><code class="hljs css language-js">var config = {
+    headers: {
+        'Access-Control-Allow-Headers': '*',
+        'Authorization': "***Auth Token***
+    }
+}
+
+fetch('"server_url"/edc/api/{connectorName}/_table/{tableName}', config)
+.then(res =&gt; res.json())
+.then(data =&gt; console.log(data))
+</code></pre>
+<p>The EDC will return the list of columns in the following format:</p>
+<pre><code class="hljs css language-json">[
+  {
+    <span class="hljs-attr">"Id"</span>: <span class="hljs-string">"00000000-0000-0000-0000-000000000000"</span>,
+    <span class="hljs-attr">"Column1"</span>: <span class="hljs-string">"string"</span>,
+    <span class="hljs-attr">"Column2"</span>: <span class="hljs-number">0</span>
+  }
+]
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="retrieve-a-single-row-from-a-table"></a><a href="#retrieve-a-single-row-from-a-table" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Retrieve a single row from a table</h2>
+<p>To retrieve a single row from a table, perform the following <code>GET</code> request:</p>
+<p><code>&quot;server_url&quot;/edc/api/{connectorName}/_table/{tableName}/{id}</code></p>
+<p><strong>Example</strong> In a React application, this request might look like the following:</p>
+<pre><code class="hljs css language-js">var config = {
+    headers: {
+        'Access-Control-Allow-Headers': '*',
+        'Authorization': "***Auth Token***
+    }
+}
+
+fetch('"server_url"/edc/api/{connectorName}/_table/{tableName}/{id}', config)
+.then(res =&gt; res.json())
+.then(data =&gt; console.log(data))
+</code></pre>
+<p>The EDC will return the record in the following format:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"Id"</span>: <span class="hljs-string">"00000000-0000-0000-0000-000000000000"</span>,
+  <span class="hljs-attr">"Column1"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-attr">"Column2"</span>: <span class="hljs-number">0</span>
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="insert-a-record-into-a-table"></a><a href="#insert-a-record-into-a-table" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Insert a record into a table</h2>
+<p>To insert a record into a table, perform the following <code>POST</code> request:</p>
+<p><code>&quot;server_url&quot;/edc/api/{connectorName}/_table/{tableName}</code></p>
+<p><strong>Example</strong> In a React application, this request might look like the following:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">//Must create an object containing the required fields to POST to the database.</span>
+<span class="hljs-keyword">var</span> data = {
+  <span class="hljs-string">"Id"</span>: <span class="hljs-string">"00000000-0000-0000-0000-000000000000"</span>,
+  <span class="hljs-string">"Column1"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-string">"Column2"</span>: <span class="hljs-number">0</span>
+}
+
+fetch(<span class="hljs-string">'"server_url"/edc/api/{connectorName}/_table/{tableName}'</span>, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'post'</span>,
+    <span class="hljs-attr">headers</span>: {<span class="hljs-string">'content-type'</span>:<span class="hljs-string">'application/json'</span>},
+    <span class="hljs-attr">body</span>: data
+})
+.then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.json()
+.then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)))
+</code></pre>
+<p>If successful, the EDC will return a <code>200</code> status as well as the exact object that was inserted into the database.</p>
+<h2><a class="anchor" aria-hidden="true" id="delete-a-record-in-a-table"></a><a href="#delete-a-record-in-a-table" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Delete a record in a table</h2>
+<p>To delete a record, perform the following <code>DELETE</code> request:</p>
+<p><code>&quot;server_url&quot;/edc/api/{connectorName}/_table/{tableName}/{id}</code></p>
+<p><strong>Example</strong> In a React application, this request might look like the following:</p>
+<pre><code class="hljs css language-js">
+fetch(<span class="hljs-string">'"server_url"/edc/api/{connectorName}/_table/{tableName}/{id}'</span>, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'post'</span>,
+    <span class="hljs-attr">headers</span>: {<span class="hljs-string">'content-type'</span>:<span class="hljs-string">'application/json'</span>}
+})
+.then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.json()
+.then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)))
+</code></pre>
+<p>If successful, the EDC will return a <code>200</code> status as well as the exact object that was inserted into the database.</p>
+<h2><a class="anchor" aria-hidden="true" id="update-a-record-in-a-table"></a><a href="#update-a-record-in-a-table" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update a record in a table</h2>
+<p>To update a record, perform the following <code>PUT</code> request:</p>
+<p><code>&quot;server_url&quot;/edc/api/{connectorName}/_table/{tableName}/{id}</code></p>
+<p><strong>Example</strong> In a React application, this request might look like the following:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> data = {
+  <span class="hljs-string">"Id"</span>: <span class="hljs-string">"00000000-0000-0000-0000-000000000000"</span>,
+  <span class="hljs-string">"Column1"</span>: <span class="hljs-string">"string"</span>,
+  <span class="hljs-string">"Column2"</span>: <span class="hljs-number">0</span>
+}
+
+fetch(<span class="hljs-string">'"server_url"/edc/api/{connectorName}/_table/{tableName}/{id}'</span>, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'put'</span>,
+    <span class="hljs-attr">headers</span>: {<span class="hljs-string">'content-type'</span>:<span class="hljs-string">'application/json'</span>},
+    <span class="hljs-attr">body</span>: data
+})
+.then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.json()
+.then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data)))
+</code></pre>
+<p>If successful, the EDC will return a <code>200</code> status as well as the object that was updated into the database.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/table-definition"><span class="arrow-prev">← </span><span>Table Definitions</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#retrieve-data-from-a-table">Retrieve data from a table</a></li><li><a href="#retrieve-a-single-row-from-a-table">Retrieve a single row from a table</a></li><li><a href="#insert-a-record-into-a-table">Insert a record into a table</a></li><li><a href="#delete-a-record-in-a-table">Delete a record in a table</a></li><li><a href="#update-a-record-in-a-table">Update a record in a table</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2019 Intellectix</section></footer></div></body></html>
